@@ -1,7 +1,8 @@
-import cv2
-import numpy as np
+
 
 def solution(obs):
+    import cv2
+    import numpy as np
     img = cv2.cvtColor(np.ascontiguousarray(obs), cv2.COLOR_BGR2RGB)
     rgb = img.copy()
     height = rgb.shape[0]
