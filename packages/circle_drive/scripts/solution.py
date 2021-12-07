@@ -154,6 +154,8 @@ def solution(obs):
     if y_line_pose_y > 350 and y_angles < 30:
         kP = 7.5  # коэффициент, если обнаружена желтая разметка почти горизонтально близко к роботу
     steering = kP * pose
+    if 'average_pose' not in globals():
+            average_pose = []
     if len(average_pose) < 6:  # количество элементов для вычисления среднего значения поворота руля
         average_pose.append(steering)
     else:
