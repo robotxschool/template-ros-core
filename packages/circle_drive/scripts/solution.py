@@ -150,7 +150,7 @@ def solution(obs):
         y_deviation = -80
 
     pose = -(w_deviation + y_deviation) / 1000
-    kP = 6  # основной коэффициент усиления поворота колес
+    kP = 6.5  # основной коэффициент усиления поворота колес
     if y_line_pose_y > 350 and y_angles < 30:
         kP = 7.5  # коэффициент, если обнаружена желтая разметка почти горизонтально близко к роботу
     steering = kP * pose
@@ -170,6 +170,6 @@ def solution(obs):
         vel = 0.25  # ускоряемся при движении прямо
         steering = steering * 0.95  # и корректируем руль на большой скорости
     else:
-        vel = 0.17  # скорость во время поворота
-    print("steering", steering,"angle",vel)
+        vel = 0.19  # скорость во время поворота
+    print("steering", steering,"speed",vel)
     return [vel, steering]
