@@ -4,6 +4,7 @@ def solution(obs):
     import cv2
     import numpy as np
     img = cv2.cvtColor(np.ascontiguousarray(obs), cv2.COLOR_BGR2RGB)
+    img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
     rgb = img.copy()
     height = rgb.shape[0]
     width = rgb.shape[1]
