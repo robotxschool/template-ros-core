@@ -1,3 +1,5 @@
+import cv2
+import numpy as np
 
 def solution(obs):
     img = cv2.cvtColor(np.ascontiguousarray(obs), cv2.COLOR_BGR2RGB)
