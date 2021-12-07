@@ -26,17 +26,17 @@ def solution(obs):
 
     cropped_img = region_of_interest(rgb, np.array([region_vertices], np.int32), )
     hsv = cv2.cvtColor(cropped_img, cv2.COLOR_RGB2HSV)
-#     w_lane_min = np.array((73, 9, 120), np.uint8)
-#     w_lane_max = np.array((146, 70, 255), np.uint8)
+    w_lane_min = np.array((73, 9, 120), np.uint8)
+    w_lane_max = np.array((146, 70, 255), np.uint8)
 
-#     y_lane_min = np.array((0, 0, 114), np.uint8)
-#     y_lane_max = np.array((52, 116, 255), np.uint8)
+    y_lane_min = np.array((0, 0, 114), np.uint8)
+    y_lane_max = np.array((52, 116, 255), np.uint8)
     
-    w_lane_min = np.array((47, 4, 190), np.uint8)
-    w_lane_max = np.array((101, 57, 255), np.uint8)
+#     w_lane_min = np.array((47, 4, 190), np.uint8)
+#     w_lane_max = np.array((101, 57, 255), np.uint8)
 
-    y_lane_min = np.array((17, 60, 190), np.uint8)
-    y_lane_max = np.array((43, 228, 255), np.uint8)
+#     y_lane_min = np.array((17, 60, 190), np.uint8)
+#     y_lane_max = np.array((43, 228, 255), np.uint8)
 
     w_lane = cv2.inRange(hsv, w_lane_min, w_lane_max)
     y_lane = cv2.inRange(hsv, y_lane_min, y_lane_max)
