@@ -184,7 +184,7 @@ def solution(obs):
 #         vel = 0.24
     
 #     print("steering", steering,"speed",vel)
-    steering = -6
+    steering = -1
     vel=0.2
     return [vel, steering]
 # import cv2
