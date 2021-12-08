@@ -45,7 +45,7 @@ def solution(obs):
     
     w_lane_vector = cv2.Canny(w_lane, 100, 200)
     y_lane_vector = cv2.Canny(y_lane, 100, 200)
-    cv2.imshow('111', w_lane_vector)
+    #cv2.imshow('111', w_lane_vector)
     w_lines = cv2.HoughLinesP(w_lane_vector, rho=6, theta=np.pi / 60, threshold=100,
                               lines=np.array([]), minLineLength=40, maxLineGap=25)
     y_lines = cv2.HoughLinesP(y_lane_vector, rho=6, theta=np.pi / 60, threshold=100,
