@@ -1,9 +1,10 @@
-
-
 def solution(obs):
     import cv2
     import numpy as np
+    import math
     img = cv2.cvtColor(np.ascontiguousarray(obs), cv2.COLOR_BGR2RGB)
+    img = cv2.resize(img, (640, 480))
+    #img = np.ascontiguousarray(obs)
     rgb = img.copy()
     height = rgb.shape[0]
     width = rgb.shape[1]
@@ -26,30 +27,31 @@ def solution(obs):
 
     cropped_img = region_of_interest(rgb, np.array([region_vertices], np.int32), )
     hsv = cv2.cvtColor(cropped_img, cv2.COLOR_RGB2HSV)
+    
 #     w_lane_min = np.array((73, 9, 120), np.uint8)
 #     w_lane_max = np.array((146, 70, 255), np.uint8)
 
 #     y_lane_min = np.array((0, 0, 114), np.uint8)
 #     y_lane_max = np.array((52, 116, 255), np.uint8)
     
-    w_lane_min = np.array((47, 4, 190), np.uint8)
-    w_lane_max = np.array((101, 57, 255), np.uint8)
+    w_lane_min = np.array((0, 0, 153), np.uint8)
+    w_lane_max = np.array((180, 66, 255), np.uint8)
 
-    y_lane_min = np.array((17, 60, 190), np.uint8)
-    y_lane_max = np.array((43, 228, 255), np.uint8)
+    y_lane_min = np.array((16, 80, 134), np.uint8)
+    y_lane_max = np.array((23, 172, 227), np.uint8)
 
     w_lane = cv2.inRange(hsv, w_lane_min, w_lane_max)
     y_lane = cv2.inRange(hsv, y_lane_min, y_lane_max)
-
+    
     w_lane_vector = cv2.Canny(w_lane, 100, 200)
     y_lane_vector = cv2.Canny(y_lane, 100, 200)
-
-    w_lines = cv2.HoughLinesP(w_lane_vector, rho=6, theta=np.pi / 60, threshold=160,
+    cv2.imshow('111', w_lane_vector)
+    w_lines = cv2.HoughLinesP(w_lane_vector, rho=6, theta=np.pi / 60, threshold=100,
                               lines=np.array([]), minLineLength=40, maxLineGap=25)
-    y_lines = cv2.HoughLinesP(y_lane_vector, rho=6, theta=np.pi / 60, threshold=160,
+    y_lines = cv2.HoughLinesP(y_lane_vector, rho=6, theta=np.pi / 60, threshold=100,
                               lines=np.array([]), minLineLength=40, maxLineGap=25)
-    # print ("White:" , w_lines)
-    # print ("Yellow:" , y_lines)
+    #print ("White:", w_lines)
+    #print ("Yellow:" , y_lines)
     w_angles = 0.0
     y_angles = 0.0
     w_line_pose_x = 0.0
@@ -138,13 +140,17 @@ def solution(obs):
                  (125, 50, 50), thickness=5)
     except:
         w_angles = 0
-    w_need = 560
-    y_need = 80
+    # cv2.imshow('111',rgb)
+    # cv2.waitKey()
+
+    #print(w_line_pose_x, y_line_pose_x)
+    w_need = 590
+    y_need = 130
     if w_line_pose_x > 0:
         w_deviation = w_line_pose_x - w_need
     else:
         w_deviation = 80
-    if y_line_pose > 0:
+    if y_line_pose_x > 0:
         y_deviation = y_line_pose_x - y_need
     else:
         y_deviation = -80
@@ -173,3 +179,6 @@ def solution(obs):
         vel = 0.19  # скорость во время поворота
     print("steering", steering,"speed",vel)
     return [vel, steering]
+# import cv2
+# img = cv2.imread('77.png')
+# print(solution(img))
