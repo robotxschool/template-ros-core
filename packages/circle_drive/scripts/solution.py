@@ -149,7 +149,7 @@ def solution(obs):
         w_deviation = w_line_pose_x - w_need
     else:
         w_deviation = 80
-    w_deviation =0
+    w_deviation =80
     if y_line_pose_x > 0:
         y_deviation = y_line_pose_x - y_need
     else:
