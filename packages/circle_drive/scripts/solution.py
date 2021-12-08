@@ -143,9 +143,9 @@ def solution(obs):
     # cv2.imshow('111',rgb)
     # cv2.waitKey()
 
-    print(w_line_pose_x, y_line_pose_x)
+    print("W", w_line_pose_x,"Y", y_line_pose_x)
     w_need = 590
-    y_need = 250
+    y_need = 200
     if w_line_pose_x > 0:
         w_deviation = w_line_pose_x - w_need
     else:
@@ -177,7 +177,7 @@ def solution(obs):
         steering = steering * 0.95  # и корректируем руль на большой скорости
     else:
         vel = 0.21  # скорость во время поворота
-    steering -= 0.4
+    steering -= 0.3
     if steering>1:
         steering=1
         vel = 0.26
