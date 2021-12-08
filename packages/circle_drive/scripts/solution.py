@@ -185,7 +185,7 @@ def solution(obs):
     
 #     print("steering", steering,"speed",vel)
     steering = -0.5
-    vel=0
+    vel=0.2
     return [vel, steering]
 # import cv2
 # img = cv2.imread('77.png')
