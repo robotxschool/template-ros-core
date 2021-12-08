@@ -173,10 +173,14 @@ def solution(obs):
         steering = steering / len(average_pose)
     
     if -0.12 < steering < 0.12 and steering != 0:
-        vel = 0.25  # ускоряемся при движении прямо
+        vel = 0.28  # ускоряемся при движении прямо
         steering = steering * 0.95  # и корректируем руль на большой скорости
     else:
-        vel = 0.25  # скорость во время поворота
+        vel = 0.28  # скорость во время поворота
+    if steering>1:
+        steering=1
+    if steering<-1:
+        steering=-1
     print("steering", steering,"speed",vel)
     return [vel, steering]
 # import cv2
