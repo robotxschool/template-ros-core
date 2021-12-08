@@ -176,7 +176,6 @@ def solution(obs):
         steering = steering * 0.95  # и корректируем руль на большой скорости
     else:
         vel = 0.21  # скорость во время поворота
-    steering -= 0.3
     if steering>1:
         steering=1
         vel = 0.26
