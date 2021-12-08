@@ -183,6 +183,7 @@ def solution(obs):
     if steering<-1:
         steering=-1
         vel = 0.26
+    steering += 0.4
     print("steering", steering,"speed",vel)
     return [vel, steering]
 # import cv2
