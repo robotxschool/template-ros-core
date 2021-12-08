@@ -143,8 +143,8 @@ def solution(obs):
     # cv2.waitKey()
 
     print("W", w_line_pose_x,"Y", y_line_pose_x)
-    w_need = 590
-    y_need = 200
+    w_need = 560
+    y_need = 80
     if w_line_pose_x > 0:
         w_deviation = w_line_pose_x - w_need
     else:
@@ -161,7 +161,7 @@ def solution(obs):
     steering = kP * pose
     if 'average_pose' not in globals():
             average_pose = []
-    if len(average_pose) < 6:  # количество элементов для вычисления среднего значения поворота руля
+    if len(average_pose) < 2:  # количество элементов для вычисления среднего значения поворота руля
         average_pose.append(steering)
     else:
         average_pose.pop(0)
