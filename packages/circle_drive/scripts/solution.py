@@ -178,6 +178,6 @@ def solution(obs):
         vel = 0.25 # ускоряемся при движении прямо
         steering = steering * 0.98  # и корректируем руль на большой скорости
     else:
-        vel = 0.21  # скорость во время поворота
+        vel = 0.23  # скорость во время поворота
     print("steering", steering, "speed",vel)
     return [vel, steering]
