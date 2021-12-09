@@ -2,7 +2,11 @@ def solution(obs):
     import cv2
     import numpy as np
     import math
+    if 'start' not in globals():
+        start = True
+        return [0.25,0]
     img = cv2.cvtColor(np.ascontiguousarray(obs), cv2.COLOR_BGR2RGB)
+    img = cv2.resize(img,(640,480))
     #img = np.ascontiguousarray(obs)
     rgb = img.copy()
     height = rgb.shape[0]
@@ -15,7 +19,6 @@ def solution(obs):
         (width, height * 3 / 5),
         (width, height)
     ]
-
     def region_of_interest(img, vertices):
         mask = np.zeros_like(img)
         ch_count = img.shape[2]
@@ -44,7 +47,6 @@ def solution(obs):
     
     w_lane_vector = cv2.Canny(w_lane, 100, 200)
     y_lane_vector = cv2.Canny(y_lane, 100, 200)
-    #cv2.imshow('111', w_lane_vector)
     w_lines = cv2.HoughLinesP(w_lane_vector, rho=6, theta=np.pi / 60, threshold=100,
                               lines=np.array([]), minLineLength=40, maxLineGap=25)
     y_lines = cv2.HoughLinesP(y_lane_vector, rho=6, theta=np.pi / 60, threshold=100,
@@ -107,7 +109,7 @@ def solution(obs):
         angles = 0.0
         for line in w_lines:
             for x1, y1, x2, y2 in line:
-                if x1>320:
+                if x1>360:
                     if (y2 > y1):
                         tmpX = x1
                         tmpY = y1
@@ -139,29 +141,30 @@ def solution(obs):
                  (125, 50, 50), thickness=5)
     except:
         w_angles = 0
-    # cv2.imshow('111',rgb)
-    # cv2.waitKey()
 
-    print("W", w_line_pose_x,"Y", y_line_pose_x)
-    w_need = 560
-    y_need = 80
+    #cv2.imshow('111',rgb)
+    #cv2.waitKey()
+
+    print(w_line_pose_x, y_line_pose_x)
+    w_need = 496
+    y_need = 168
     if w_line_pose_x > 0:
         w_deviation = w_line_pose_x - w_need
     else:
-        w_deviation = 80
+        w_deviation = 40
     if y_line_pose_x > 0:
         y_deviation = y_line_pose_x - y_need
     else:
-        y_deviation = -80
+        y_deviation = 40
 
     pose = -(w_deviation + y_deviation) / 1000
-    kP = 17  # основной коэффициент усиления поворота колес
-    if y_line_pose_y > 350 and y_angles < 30:
-        kP = 13  # коэффициент, если обнаружена желтая разметка почти горизонтально близко к роботу
+    kP = 10  # основной коэффициент усиления поворота колес
+    if y_line_pose_y > 370 and y_angles < 32:
+        kP = 10  # коэффициент, если обнаружена желтая разметка почти горизонтально близко к роботу
     steering = kP * pose
     if 'average_pose' not in globals():
             average_pose = []
-    if len(average_pose) < 2:  # количество элементов для вычисления среднего значения поворота руля
+    if len(average_pose) < 6:  # количество элементов для вычисления среднего значения поворота руля
         average_pose.append(steering)
     else:
         average_pose.pop(0)
@@ -172,12 +175,9 @@ def solution(obs):
         steering = steering / len(average_pose)
     
     if -0.12 < steering < 0.12 and steering != 0:
-        vel = 0.2  # ускоряемся при движении прямо
-        steering = steering * 0.95  # и корректируем руль на большой скорости
+        vel = 0.25 # ускоряемся при движении прямо
+        steering = steering * 0.98  # и корректируем руль на большой скорости
     else:
-        vel = 0.2  #скорость во время поворота
-    print("steering", steering,"speed",vel)
+        vel = 0.20  # скорость во время поворота
+    print("steering", steering, "speed",vel)
     return [vel, steering]
-# import cv2
-# img = cv2.imread('77.png')
-# print(solution(img))
