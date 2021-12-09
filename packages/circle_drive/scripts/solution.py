@@ -160,11 +160,11 @@ def solution(obs):
     pose = -(w_deviation + y_deviation) / 1000
     kP = 12  # основной коэффициент усиления поворота колес
     if y_line_pose_y > 370 and y_angles < 32:
-        kP = 12  # коэффициент, если обнаружена желтая разметка почти горизонтально близко к роботу
+        kP = 14  # коэффициент, если обнаружена желтая разметка почти горизонтально близко к роботу
     steering = kP * pose
     if 'average_pose' not in globals():
             average_pose = []
-    if len(average_pose) < 2:  # количество элементов для вычисления среднего значения поворота руля
+    if len(average_pose) < 1:  # количество элементов для вычисления среднего значения поворота руля
         average_pose.append(steering)
     else:
         average_pose.pop(0)
