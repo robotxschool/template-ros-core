@@ -147,20 +147,20 @@ def solution(obs):
 
     print(w_line_pose_x, y_line_pose_x)
     w_need = 600
-    y_need = 200
+    y_need = 150
     if w_line_pose_x > 0:
         w_deviation = w_line_pose_x - w_need
     else:
-        w_deviation = 60
+        w_deviation = 80
     if y_line_pose_x > 0:
         y_deviation = y_line_pose_x - y_need
     else:
-        y_deviation = -60
+        y_deviation = -80
 
     pose = -(w_deviation + y_deviation) / 1000
-    kP = 13  # основной коэффициент усиления поворота колес
+    kP = 11  # основной коэффициент усиления поворота колес
     if y_line_pose_y > 370 and y_angles < 32:
-        kP = 13  # коэффициент, если обнаружена желтая разметка почти горизонтально близко к роботу
+        kP = 11  # коэффициент, если обнаружена желтая разметка почти горизонтально близко к роботу
     steering = kP * pose
     if 'average_pose' not in globals():
             average_pose = []
