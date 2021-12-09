@@ -164,7 +164,7 @@ def solution(obs):
     steering = kP * pose
     if 'average_pose' not in globals():
             average_pose = []
-    if len(average_pose) < 2:  # количество элементов для вычисления среднего значения поворота руля
+    if len(average_pose) < 1:  # количество элементов для вычисления среднего значения поворота руля
         average_pose.append(steering)
     else:
         average_pose.pop(0)
