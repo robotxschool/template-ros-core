@@ -146,16 +146,16 @@ def solution(obs):
     #cv2.waitKey()
 
     print(w_line_pose_x, y_line_pose_x)
-    w_need = 560
+    w_need = 450
     y_need = 130
     if w_line_pose_x > 0:
         w_deviation = w_line_pose_x - w_need
     else:
-        w_deviation = 80
+        w_deviation = 60
     if y_line_pose_x > 0:
         y_deviation = y_line_pose_x - y_need
     else:
-        y_deviation = -80
+        y_deviation = -60
 
     pose = -(w_deviation + y_deviation) / 1000
     kP = 13  # основной коэффициент усиления поворота колес
