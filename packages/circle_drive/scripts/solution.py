@@ -146,8 +146,8 @@ def solution(obs):
     #cv2.waitKey()
 
     print(w_line_pose_x, y_line_pose_x)
-    w_need = 450
-    y_need = 130
+    w_need = 600
+    y_need = 200
     if w_line_pose_x > 0:
         w_deviation = w_line_pose_x - w_need
     else:
