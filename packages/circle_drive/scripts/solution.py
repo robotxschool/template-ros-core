@@ -2,9 +2,9 @@ def solution(obs):
     import cv2
     import numpy as np
     import math
-    if 'start' not in globals():
-        start = True
-        return [0.25,0]
+#     if 'start' not in globals():
+#         start = True
+#         return [0.25,0]
     img = cv2.cvtColor(np.ascontiguousarray(obs), cv2.COLOR_BGR2RGB)
     img = cv2.resize(img,(640,480))
     #img = np.ascontiguousarray(obs)
