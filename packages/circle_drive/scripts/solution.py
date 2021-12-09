@@ -147,7 +147,7 @@ def solution(obs):
 
     print(w_line_pose_x, y_line_pose_x)
     w_need = 560
-    y_need = 200
+    y_need = 130
     if w_line_pose_x > 0:
         w_deviation = w_line_pose_x - w_need
     else:
